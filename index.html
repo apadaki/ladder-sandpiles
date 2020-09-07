@@ -3,27 +3,86 @@
 <html>
     
     <head>
+
         <meta charset="utf-8">
         <title> </title>
     </head>
-    <link rel="stylesheet" href="style.css">
-    <body>
-        <canvas id="screen" width="800" , height="500"></canvas>
-        <script type="module" src='components/index.js'> </script>
 
+    <link rel="stylesheet" href="style.css">
+
+    
+    <body>
+
+        <script type="module" src="components/index.js"></script>
+
+        <form>
+            <label for="length">length:</label>
+            <select id="length">
+            </select>
+            <br><br>
+            <label for="lname">p value (decimal value between 0 and 1):</label>
+            <input type="text" id="pvalue"><br><br>
+            <label for="speed">speed</label>
+            <select id="speed">
+                <option value="slow"> slow </option>
+                <option value="medium"> medium </option>
+                <option value="fast"> fast </option>
+                <option value="instantaneous"> instantaneous </option>
+            </select>
+
+
+        </form>
+
+        <div id="buttons"></div>
+        
         <script>
-            function reload() {
-                var container = document.getElementById("module");
-                var content = container.innerHTML;
-                container.innerHTML = content; 
-                
-                //this line is to watch the result in console , you can remove it later	
-                console.log("Refreshed"); 
+            let str = "";
+            for (let i = 1; i < 26; i++) {
+                let val = (i===1) ? "blank" : i;
+                str = str + ("<option value='" + val + "'>" + val + "</option>"); 
             }
-            
+            document.getElementById("length").insertAdjacentHTML('beforeend', str);
         </script>
 
-        <a href="javascript: reload()">Click to Reload</a>
+        <script type="module">
+            import index from './components/index.js';
+
+            var initializeButton = document.createElement("button");
+            initializeButton.innerHTML = "initialize";
+            var buttondiv = document.getElementById("buttons");
+            buttondiv.appendChild(initializeButton);
+            
+
+            var simulateButton = document.createElement("button");
+            simulateButton.id = "simulate";
+            simulateButton.innerHTML = "simulate!";
+            buttondiv.appendChild(simulateButton);
+            simulateButton.disabled=true;
+
+
+            initializeButton.addEventListener("click", function() {
+                index(true);
+
+            });
+            simulateButton.addEventListener("click", function() {
+                index(false);
+            });
+            
+            
+
+        </script>
+
+        <br>
+        
+        <canvas id="screen" width="800" , height="500"></canvas>
+
+        
+        
+
+        
+
+        
+
 
     </body>
 </html>

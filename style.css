@@ -3,5 +3,15 @@ body {
 }
 
 canvas {
+    margin-top: 0px;
     background-color: rgb(30,30,30);
+}
+
+form {
+    background-color: rgb(60,60,60);
+    color: white;
+    width: 50%;
+    padding: 10px;
+    line-height: 10px;
+    margin-bottom: 10px;
 }
