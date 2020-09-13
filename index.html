@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 
 <html>
-    
     <head>
 
         <meta charset="utf-8">
         <title> </title>
     </head>
-
     <link rel="stylesheet" href="style.css">
 
-    
     <body>
 
         <script type="module" src="components/index.js"></script>
@@ -29,8 +26,6 @@
                 <option value="fast"> fast </option>
                 <option value="instantaneous"> instantaneous </option>
             </select>
-
-
         </form>
 
         <div id="buttons"></div>
@@ -48,6 +43,7 @@
             import index from './components/index.js';
 
             var initializeButton = document.createElement("button");
+            initializeButton.id = 'initialize';
             initializeButton.innerHTML = "initialize";
             var buttondiv = document.getElementById("buttons");
             buttondiv.appendChild(initializeButton);
@@ -59,30 +55,22 @@
             buttondiv.appendChild(simulateButton);
             simulateButton.disabled=true;
 
-
             initializeButton.addEventListener("click", function() {
                 index(true);
-
+                var stopSwitch = document.getElementById("stopSwitch");
+                stopSwitch.status = "on";
+                document.getElementById("initialize").innerHTML = "initialize";
+                document.getElementById("initialize").style.backgroundColor = null;
             });
             simulateButton.addEventListener("click", function() {
+                document.getElementById("stopSwitch").status = "off";
                 index(false);
+                document.getElementById("initialize").innerHTML = "STOP";
+                document.getElementById("initialize").style.backgroundColor = "red";
             });
-            
-            
-
         </script>
-
+        <div id="stopSwitch" status="off"> </div>
         <br>
-        
         <canvas id="screen" width="800" , height="500"></canvas>
-
-        
-        
-
-        
-
-        
-
-
     </body>
 </html>

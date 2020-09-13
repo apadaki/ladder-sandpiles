@@ -5,10 +5,12 @@ body {
 canvas {
     margin-top: 0px;
     background-color: rgb(30,30,30);
+    border: 2px solid white;
 }
 
 form {
     background-color: rgb(60,60,60);
+    border: 2px solid white;
     color: white;
     width: 50%;
     padding: 10px;

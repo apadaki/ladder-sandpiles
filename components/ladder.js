@@ -11,11 +11,6 @@ export default function ladder(nLength, pVal) {
         if (initialGrains === degree) this.unstableIndexes.push(i); 
     }
 
-    
-    for (let i = 0; i < 2*this.nLength; i++) {
-
-    }
-
     this.adjDict = {};
     for (let i = 0; i < 2*this.nLength; i++) {
         this.adjDict[i] = [];
@@ -27,24 +22,12 @@ export default function ladder(nLength, pVal) {
             }
         } 
     }
-    // this.adjMatrix = new Array(this.nLength);
-    // for (let i = 0; i < 2*this.nLength; i++) {
-    //     this.adjMatrix[i] = new Array(this.nLength);
-    //     for (let j = 0; j < 2*this.nLength; j++) {
-    //         this.adjMatrix[i][j] = (Math.abs(i-j) === 1 || Math.abs(i-j) === this.nLength) ? 1 : 0;
-    //     } 
-    // }
-
-    /*
-        array of length 2n, containing all vals
-        (2n by 2n) adjacency matrix
-
-    */
 
     this.update = function() {
         if (this.isStable()) return;
         let randIndex = this.unstableIndexes[Math.floor(this.unstableIndexes.length*Math.random())];
         this.topple(randIndex);
+        return randIndex;
     }
 
     this.topple = function(index) {

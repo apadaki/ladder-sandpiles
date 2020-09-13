@@ -21,18 +21,6 @@ export default function simulate(initial) {
 
     let N = parseInt(document.getElementById("length").value);
     let pValue = parseFloat(document.getElementById("pvalue").value);
-    let loopInterval;
-    switch (document.getElementById("speed").value) {
-        case "slow": 
-            loopInterval=1000;
-            break;
-        case "medium":
-            loopInterval=300;
-        case "fast": 
-            loopInterval=50;
-        case "instantaneous":
-            loopInterval=5;
-    }
     let ladderGraph;
     
     sim();
@@ -41,6 +29,7 @@ export default function simulate(initial) {
         solve();
 
     }
+
 
     function sim() {
         ladderGraph = new ladder(N, pValue);
@@ -55,14 +44,33 @@ export default function simulate(initial) {
     }
     
     function solve() {
-        ladderGraph.update();
-        draw();
-        if (!ladderGraph.isStable()) setTimeout(solve, 50);
+        if (document.getElementById("stopSwitch").status=="on") return;
+        
+
+        let index = ladderGraph.update();
+        draw(index);
+        let loopInterval;
+        switch (document.getElementById("speed").value) {
+            case "slow": 
+                loopInterval=1000;
+                break;
+            case "medium":
+                loopInterval=300;
+                break;
+            case "fast": 
+                loopInterval=50;
+                break;
+            case "instantaneous":
+                loopInterval=5;
+                break;
+        }
+        if (!ladderGraph.isStable()) setTimeout(solve, loopInterval);
         else document.getElementById("simulate").disabled = false;
 
     }
 
-    function draw() {
+    function draw(latestIndex) {
+        console.log(latestIndex);
         ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
         ctx.strokeStyle = "#ffffff";
@@ -79,10 +87,24 @@ export default function simulate(initial) {
             let x = x1 + i * edgeLength;
 
             ctx.font = "24px Consolas";
-            ctx.fillText(ladderGraph.grains[i], x-4, y1-10);
+            ctx.fillStyle = "rgb(0,255,128)";
+            if (latestIndex === i) {
+                ctx.fillStyle = "rgb(255,0,100)";
+                ctx.fillText(ladderGraph.grains[i], x-4, y1-10);
+                ctx.fillStyle = "rgb(0,255,128)";
+            }
+            else ctx.fillText(ladderGraph.grains[i], x-4, y1-10);
+            
 
             ctx.font = "24px Consolas";
-            ctx.fillText(ladderGraph.grains[i+N], x-4, y2+20);
+            if (latestIndex === i+N) {
+                ctx.fillStyle = "rgb(255,0,100)";
+                ctx.fillText(ladderGraph.grains[i+N], x-4, y2+23);
+                ctx.fillStyle = "rgb(0,255,128)";
+            }
+            else ctx.fillText(ladderGraph.grains[i+N], x-4, y2+23);
+
+            ctx.fillStyle = "white";
 
             
             ctx.beginPath();
@@ -108,10 +130,5 @@ export default function simulate(initial) {
     ctx.stroke();
 
     }
-
-
-    function sleep(millisecs) {
-        return new Promise(resolve => setTimeout(resolve, millisecs));
-}
 }
 
