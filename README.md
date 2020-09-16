@@ -2,7 +2,7 @@
 
 ## Description
 
-A JavaScript web app that simulates a special class of [abelian sandpiles](https://en.wikipedia.org/wiki/Abelian_sandpile_model). In particular, the app simulates the stablization of abelian sandpiles configured with a Bernoulli distribution on the ladder graph $\mathbb{Z}\times \mathbb{Z}_2$.
+A JavaScript web app that simulates a special class of [abelian sandpiles](https://en.wikipedia.org/wiki/Abelian_sandpile_model). In particular, the app simulates the stablization of abelian sandpiles configured with a Bernoulli distribution on the ladder graph <img src="https://render.githubusercontent.com/render/math?math=\mathbb{Z}\times \mathbb{Z}_2">.
 
 ## Usage
 
